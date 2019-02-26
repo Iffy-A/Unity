@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Money : MonoBehaviour {
+    public PlayerHealthManager plMan; //This script contains the 'Current Gold' variable
+    public GameObject gold;
+    public Text goldText;
+    bool isTrigger = false;  //Set to false & is set true in collision
+    
+    public void AddGold(int goldToAdd)  {
+      if(isTrigger == true) { //
+        plMan.curGold += goldToAdd;
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag.Contains("Player")) { //This checks that the object that was collided with was the player
+          isTrigger = true; 
+          Destroy(gold); 
+          AddGold(1); //Set the value that you want the object to have
+          goldText.text = "Gold: " + plMan.curGold; //This will show how much gold the player has in the UI
+        }
+    }
+}
