@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Money : MonoBehaviour {
-    public PlayerHealthManager plMan; //This script contains the 'Current Gold' variable
+    public PlayerStatManager plMan; //This script contains the 'Current Gold' variable
     public GameObject gold;
     public Text goldText;
     bool isTrigger = false;  //Set to false & is set true in collision
