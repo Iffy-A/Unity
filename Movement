@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerController : MonoBehaviour {
+
+    PlayerStats plStats;
+
+    public Rigidbody2D plRb;
+    public Animator plAnim;
+
+    public int moveSpeed;
+    public int runSpeed;
+
+    Vector2 move;
+
+    void Start() {
+        plRb = FindObjectOfType<Rigidbody2d>();
+        plAnim = FindObjectOfType<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update() {
+        float MoveX = Input.GetAxis("Horizontal");
+        float MoveY = Input.GetAxis("Vertical");
+
+        if (Input.GetButton("Fire3")) {  //Player Run if the player has stamina
+            move = new Vector2(MoveX, MoveY) * runSpeed;
+        } else { //Walk Speed
+            move = new Vector2(MoveX, MoveY) * moveSpeed; 
+        }
+    }
+}
