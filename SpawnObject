@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class spawnObj : MonoBehaviour {
+
+    public int cTime; //Set variable time here
+    
+    public int tTime; //Time integer once reaches a certain increment then spawn something in then move at the player
+    
+    public GameObject[] spawner; // This allows the user to make surre that they can specify how many objects that you want to spawn in 
+                                 // the inspector
+    
+    public Vector3 position;  // This was used to specify where the empty gameobject was in the scene
+                              // Alternatively you can specify it to "this.transform.position" 
+
+    void FixedUpdate() {
+        tTime++;
+        int instSpa = Random.Range(0, (spawner.Length - 1));
+        if(tTime >= cTime) {
+            Instantiate(spawner[instSpa], position, Quaternion.identity); 
+            tTime = 0;
+        }
+    }
+}
