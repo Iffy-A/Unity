@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour {
     public Button optionsButton;
     public Button quitButton;
 
-    void playGame() { SceneManager.LoadScene(2); }
-    void options() { SceneManager.LoadScene(1); }
-    void quit() { Application.Quit(); }
+    void playGame() { SceneManager.LoadScene(2); } //Set to your main game
+    void options() { SceneManager.LoadScene(1); }  //Options page or set to panel
+    void quit() { Application.Quit(); }            //Close the game
 }
