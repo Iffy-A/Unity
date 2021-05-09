@@ -1,0 +1,66 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MovingPlat : MonoBehaviour {
+
+    public bool moveX;
+    public bool moveY;
+    public bool moveZ;
+
+    public float xPos; //   Set the positions as these are the start positions for the platforms to move
+    public float yPos;
+    public float zPos;
+    public float endPos; 
+
+    static float t = 0f;
+
+    void LateUpdate() {
+        if (moveX == true) {
+            MovePlatX();
+        } else if (moveY == true) {
+            MovePlatY();
+        } else if (moveZ == true) {
+            MovePlatZ();
+        }
+    }
+
+    void MovePlatX() {
+        transform.position = new Vector3(Mathf.Lerp(xPos, endPos, t), yPos, zPos);
+
+        t += 0.5f * Time.deltaTime;
+        if (t > 1f)
+        {
+            float temp = endPos;
+            endPos = xPos;
+            startPos = temp;
+            t = 0.0f;
+        }
+    }
+
+    void MovePlatY() {
+        transform.position = new Vector3(xPos, Mathf.Lerp(yPos, endPos, t), zPos);
+
+        t += 0.5f * Time.deltaTime;
+        if (t > 1f)
+        {
+            float temp = endPos;
+            endPos = yPos;
+            startPos = temp;
+            t = 0.0f;
+        }
+    }
+
+    void MovePlatZ() {
+        transform.position = new Vector3(xPos, yPos, Mathf.Lerp(zPos, endPos, t));
+
+        t += 0.5f * Time.deltaTime;
+        if (t > 1f)
+        {
+            float temp = endPos;
+            endPos = zPos;
+            startPos = temp;
+            t = 0.0f;
+        }
+    }
+ }
