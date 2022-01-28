@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour {
+
+  public Transform slotOne;
+  public Transform slotTwo;
+  public Transform slotThree;
+  public Transform slotFour;
+  
+  public void CreateBackObject(GameObject worldObj, GameObject prefabObj, Transform backSlot, string objName) {
+    GameObject backObj = new GameObject();
+    backObj.name = objName;
+    backObj.AddComponent<MeshRenderer>();
+    backObj.GetComponent<MeshRenderer>().material = prefabObj.GetComponent<MeshRenderer>().sharedMaterial;
+    backObj.AddComponent<MeshFilter>();
+    backObj.GetComponent<MeshFilter>().mesh = prefabObj.GetComponent<MeshFilter>().sharedMesh;
+    backObj.transform.localScale = prefabObj.transform.localScale;
+    backObj.transform.position = backSlot.position;
+    backObj.transform.parent = backSlot;
+    backObj.transform.localRotation = prefabObj.transform.rotation;
+    backObj = prefabObj;
+    Destroy(worldObj);
+  }
+}
