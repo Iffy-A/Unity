@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class InteractInv : MonoBehaviour {
+
+    public string objName;
+    public GameObject prefabObj;
+    public int slot;
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag.Contains("Player")) {
+            Inventory inv = other.GetComponent<Inventory>();
+            if (inv != null) {
+                switch (slot) {
+                    case 1:
+                        inv.CreateBackObject(this.gameObject, prefabObj, inv.slotOne, objName);
+                        break;
+                    case 2:
+                        inv.CreateBackObject(this.gameObject, prefabObj, inv.slotOne, objName);
+                        break;
+                    case 3:
+                        inv.CreateBackObject(this.gameObject, prefabObj, inv.slotThree, objName);
+                        break;
+                    case 4:
+                        inv.CreateBackObject(this.gameObject, prefabObj, inv.slotFour, objName);
+                        break;
+                }
+            }
+            else { Debug.Log("No Inv attached"); }
+        }
+    }
+}
