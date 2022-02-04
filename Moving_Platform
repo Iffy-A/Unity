@@ -11,8 +11,8 @@ public class MovingPlat : MonoBehaviour {
     public float xPos; //   Set the positions as these are the start positions for the platforms to move
     public float yPos;
     public float zPos;
-    public float endPos; 
 
+    public float endPos; //  The final position that the platform will move to
     static float t = 0f;
 
     void LateUpdate() {
@@ -33,7 +33,7 @@ public class MovingPlat : MonoBehaviour {
         {
             float temp = endPos;
             endPos = xPos;
-            startPos = temp;
+            xPos = temp;
             t = 0.0f;
         }
     }
@@ -46,7 +46,7 @@ public class MovingPlat : MonoBehaviour {
         {
             float temp = endPos;
             endPos = yPos;
-            startPos = temp;
+            yPos = temp;
             t = 0.0f;
         }
     }
@@ -59,7 +59,7 @@ public class MovingPlat : MonoBehaviour {
         {
             float temp = endPos;
             endPos = zPos;
-            startPos = temp;
+            zPos = temp;
             t = 0.0f;
         }
     }
