@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyController : MonoBehaviour { 
+    
+    float startPosX, float startPosZ;
+    public float sightRadius = 10f;
+    NavMeshAgent navAgent;
+    public float timeToAttack;
+
+    public float pointX, pointZ;
+    bool pointXReached, pointZReached = false;
+    public bool moveX, moveZ;
+    
+    void Start() {
+      startPosX = transform.position.x; startPosZ = transform.position.z;
+      navAgent = GetComponent<NavMeshAgent>();
+      player = GameObject.FindWithTag("Player").transform;
+    }
+    
+    void Update() {
+    if (moveX && !pointXReached) EnemMoveToPoint();
+    else if (moveX && pointXReached) EnemMoveToOrigin();
+    
+    if (moveZ && !pointZReached) EnemMoveToPoint();
+    else if (moveZ && pointZReached) EnemMoveToOrigin();
+    
+    void EnemMoveToOrigin() {
+      Vector3 originPosX = new Vector3(startPosX, transform.position.y, transform.position.y);
+      Vector3 originPosZ = new Vector3(transform.position.x, transform.position.y, startPosZ);
+      float speed = navAgent.speed * Time.deltaTime;
+        
+      if (moveX) {
+        transform.position = Vector3.MoveTowards(transform.position, originPosX, speed);
+        transform.rotation = Quaternion.LookRotation(originPosX);
+        if (transform.position == originPosX) {
+          pointXReached = false;
+        }
+      } if (moveZ) {
+          transform.position = Vector3.MoveTowards(transform.position, originPosZ, speed);
+          transform.rotation = Quaternion.LookRotation(originPosZ);
+          if (transform.position == originPosZ) {
+            pointZReached = false;
+          }
+      }
+    }
+
+    private void EnemMoveToPoint() {
+      Vector3 targetPosX = new Vector3(pointX, transform.position.y, transform.position.y);
+      Vector3 targetPosZ = new Vector3(transform.position.x, transform.position.y, pointZ);
+
+      float speed = navAgent.speed * Time.deltaTime;
+
+      if (moveX) {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosX, speed);
+        transform.rotation = Quaternion.LookRotation(targetPosX);
+        if (transform.position.x == pointX) {
+          pointXReached = true;
+      } if (moveZ) {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosZ, speed);
+        transform.rotation = Quaternion.LookRotation(targetPosZ);
+        if (transform.position.z == pointZ) {
+          pointZReached = true;
+        }
+      }
+    }
+  }
