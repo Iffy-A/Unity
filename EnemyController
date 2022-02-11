@@ -21,11 +21,12 @@ public class EnemyController : MonoBehaviour {
     }
     
     void Update() {
-    if (moveX && !pointXReached) EnemMoveToPoint();
-    else if (moveX && pointXReached) EnemMoveToOrigin();
-    
-    if (moveZ && !pointZReached) EnemMoveToPoint();
-    else if (moveZ && pointZReached) EnemMoveToOrigin();
+       if (moveX && !pointXReached) EnemMoveToPoint();
+       else if (moveX && pointXReached) EnemMoveToOrigin();
+       
+       if (moveZ && !pointZReached) EnemMoveToPoint();
+       else if (moveZ && pointZReached) EnemMoveToOrigin();
+    }
     
     void EnemMoveToOrigin() {
       Vector3 originPosX = new Vector3(startPosX, transform.position.y, transform.position.y);
